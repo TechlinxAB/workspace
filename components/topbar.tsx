@@ -1,6 +1,6 @@
 import { Bell, Search } from "lucide-react";
 import { signOut } from "@/auth";
-import type { Role } from "@/lib/roles";
+import { roleLabels, type Role } from "@/lib/roles";
 
 type TopbarProps = {
   user: {
@@ -21,6 +21,7 @@ function getInitials(name: string | null, email: string) {
 
 export function Topbar({ user }: TopbarProps) {
   const displayName = user.name ?? user.email;
+  const roleLabel = roleLabels[user.role];
 
   return (
     <header className="flex h-16 flex-wrap items-center justify-between gap-3">
@@ -48,7 +49,7 @@ export function Topbar({ user }: TopbarProps) {
           </span>
           <span className="pr-1 text-xs leading-tight">
             <span className="block font-semibold text-ink">{displayName}</span>
-            <span className="block text-muted">{user.role === "admin" ? "Workspace Admin" : "Workspace User"}</span>
+            <span className="block text-muted">{roleLabel}</span>
           </span>
         </div>
 

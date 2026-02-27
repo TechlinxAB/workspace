@@ -2,7 +2,7 @@
 
 ## Environment
 
-Set the following variables before running the app in development or production:
+Create a `.env` file in the project root with:
 
 ```bash
 AUTH_SECRET=
@@ -14,12 +14,22 @@ SEED_ADMIN_PASSWORD=
 SEED_ADMIN_NAME=Workspace Admin
 ```
 
-- `AUTH_SECRET` should be a 32+ character random secret.
+- `AUTH_SECRET` should be a stable 32+ character random secret.
 - Do not put secrets in any `NEXT_PUBLIC_` environment variable.
+
+## Auth Notes
+
+- There is no public signup.
+- There is no forgot-password flow.
+- Users receive credentials from Techlinx.
+- Auth runs server-side with Auth.js and Prisma-backed database sessions.
+- Admin-only APIs verify the session and require the `techlinx_admin` role server-side.
+- Login attempts are rate-limited in memory for now.
+  TODO: move the limiter to Redis before scaling to multiple instances.
 
 ## VPS Bootstrap
 
-After the env vars are set on the VPS:
+After env vars are present on the VPS:
 
 ```bash
 npm install
@@ -30,22 +40,16 @@ npm run build
 pm2 restart <your-app-name>
 ```
 
-- `npm run seed:admin` creates or updates the first admin from `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, and `SEED_ADMIN_NAME`.
-- The seed script also deletes existing sessions for that user so the updated credentials take effect immediately.
+- `npm run seed:admin` creates or updates the first `techlinx_admin` user from the `SEED_ADMIN_*` variables.
 - Keep `AUTH_URL` set to the public aaPanel/nginx domain, for example `https://workspace.techlinx.se`.
-
-## Auth Notes
-
-- Auth is handled server-side with Auth.js route handlers and server actions.
-- Sessions are stored in Postgres so admins can revoke access by deleting session rows or disabling a user.
-- Login attempts are rate-limited in memory for now.
-  TODO: replace the in-memory limiter with Redis before scaling to multiple app instances.
-- Reverse-proxy deployments should keep `AUTH_TRUST_HOST=true` so forwarded host/proto headers are trusted behind aaPanel/nginx.
 
 ## Verification Checklist
 
-- Unauthenticated requests to `/dashboard` redirect to `/login`.
-- Logged in as a customer: `/admin/*` redirects to `/dashboard`, and admin API routes return `403`.
-- Logged in as an admin: `/admin/users` can list, create, disable, re-role, and reset passwords for users.
-- Disabling a user deletes active sessions so new protected requests are blocked immediately.
-- Behind aaPanel/nginx, `AUTH_URL` and `AUTH_TRUST_HOST=true` should preserve correct callback and redirect behavior.
+- Visiting `/` redirects to `/login` when logged out.
+- Visiting `/dashboard` redirects to `/login` when logged out.
+- Successful login redirects to `/dashboard` and renders the workspace shell.
+- Invalid credentials show an inline error and do not return a 500.
+- `techlinx_admin` can access `/admin/users`.
+- Non-admin roles are redirected away from `/admin/*`.
+- Admin can change a user role and activate or deactivate users.
+- Disabled users are blocked from protected routes and see the disabled-account message.

@@ -15,6 +15,10 @@ class RateLimitedLoginError extends CredentialsSignin {
   code = "rate_limited";
 }
 
+class DisabledAccountError extends CredentialsSignin {
+  code = "disabled";
+}
+
 function getClientAddress(headers: Headers) {
   const forwardedFor = headers.get("x-forwarded-for");
   if (forwardedFor) {
@@ -113,8 +117,12 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
           }
         });
 
-        if (!user || !user.passwordHash || !user.isActive) {
+        if (!user || !user.passwordHash) {
           throw new InvalidCredentialsError();
+        }
+
+        if (!user.isActive) {
+          throw new DisabledAccountError();
         }
 
         const argon2 = loadArgon2();
@@ -143,6 +151,18 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
       }
 
       return nextSession;
+    },
+    async signIn({ user }) {
+      if (!user.id) {
+        return false;
+      }
+
+      const activeUser = await prisma.user.findUnique({
+        where: { id: user.id },
+        select: { isActive: true }
+      });
+
+      return !!activeUser?.isActive;
     }
   }
 });

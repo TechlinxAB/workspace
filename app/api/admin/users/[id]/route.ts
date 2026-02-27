@@ -6,6 +6,10 @@ import { isRole } from "@/lib/roles";
 
 export const runtime = "nodejs";
 
+function loadArgon2() {
+  return eval("require")("argon2") as typeof import("argon2");
+}
+
 export async function PATCH(request: Request, { params }: { params: Promise<{ id: string }> }) {
   const admin = await getAdminSessionUser();
   if (admin.status === 401) {
@@ -18,7 +22,6 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
 
   const { id } = await params;
   const body = await request.json();
-
   const data: Prisma.UserUpdateInput = {};
 
   if ("isActive" in body) {
@@ -48,7 +51,8 @@ export async function PATCH(request: Request, { params }: { params: Promise<{ id
     if (!temporaryPassword) {
       return NextResponse.json({ error: "Invalid password" }, { status: 400 });
     }
-    const argon2 = await import("argon2");
+
+    const argon2 = loadArgon2();
     data.passwordHash = await argon2.hash(temporaryPassword, { type: argon2.argon2id });
   }
 

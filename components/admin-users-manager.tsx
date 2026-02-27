@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useTransition } from "react";
-import type { Role } from "@/lib/roles";
+import { roleLabels, roles, type Role } from "@/lib/roles";
 import { Card } from "@/components/Card";
 
 type AdminUser = {
@@ -23,7 +23,7 @@ type CreateUserState = {
 const emptyCreateUserState: CreateUserState = {
   email: "",
   name: "",
-  role: "customer",
+  role: "client_user",
   temporaryPassword: ""
 };
 
@@ -96,7 +96,7 @@ export function AdminUsersManager() {
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
           <h1 className="text-[22px] font-bold text-ink">Users</h1>
-          <p className="mt-1 text-sm text-muted">Create, disable, and manage workspace access from the admin API.</p>
+          <p className="mt-1 text-sm text-muted">Create users, change roles, and activate or disable workspace access.</p>
         </div>
         <button
           type="button"
@@ -133,7 +133,7 @@ export function AdminUsersManager() {
                   <tr key={user.id} className="border-b border-[rgba(18,18,18,0.06)] align-top">
                     <td className="px-2 py-3 text-sm font-semibold text-ink">{user.name ?? "Unnamed user"}</td>
                     <td className="px-2 py-3 text-sm text-muted">{user.email}</td>
-                    <td className="px-2 py-3 text-sm text-ink">{user.role}</td>
+                    <td className="px-2 py-3 text-sm text-ink">{roleLabels[user.role]}</td>
                     <td className="px-2 py-3 text-sm">
                       <span
                         className={[
@@ -181,8 +181,11 @@ export function AdminUsersManager() {
                             }
                             className="focus-ring rounded-full border border-[rgba(18,18,18,0.08)] bg-white px-3 py-2 text-xs font-semibold text-ink"
                           >
-                            <option value="customer">customer</option>
-                            <option value="admin">admin</option>
+                            {roles.map((role) => (
+                              <option key={role} value={role}>
+                                {roleLabels[role]}
+                              </option>
+                            ))}
                           </select>
                         </div>
 
@@ -235,7 +238,7 @@ export function AdminUsersManager() {
               <div className="mb-5 flex items-start justify-between gap-4">
                 <div>
                   <h2 className="text-[20px] font-bold text-ink">Create workspace user</h2>
-                  <p className="mt-1 text-sm text-muted">Add a new admin or customer account with a temporary password.</p>
+                  <p className="mt-1 text-sm text-muted">Add a workspace user and assign the correct Techlinx or client role.</p>
                 </div>
                 <button
                   type="button"
@@ -278,8 +281,11 @@ export function AdminUsersManager() {
                     }
                     className="focus-ring h-11 w-full rounded-2xl border border-[rgba(18,18,18,0.08)] bg-white px-4 text-sm text-ink"
                   >
-                    <option value="customer">customer</option>
-                    <option value="admin">admin</option>
+                    {roles.map((role) => (
+                      <option key={role} value={role}>
+                        {roleLabels[role]}
+                      </option>
+                    ))}
                   </select>
                 </label>
 

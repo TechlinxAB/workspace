@@ -1,0 +1,3 @@
+module.exports=[54799,(a,b,c)=>{b.exports=a.x("crypto",()=>require("crypto"))},63021,(a,b,c)=>{b.exports=a.x("@prisma/client-2c3a283f134fdcb6",()=>require("@prisma/client-2c3a283f134fdcb6"))},93695,(a,b,c)=>{b.exports=a.x("next/dist/shared/lib/no-fallback-error.external.js",()=>require("next/dist/shared/lib/no-fallback-error.external.js"))},70864,a=>{a.n(a.i(33290))},43619,a=>{a.n(a.i(79962))},13718,a=>{a.n(a.i(85523))},18198,a=>{a.n(a.i(45518))},62212,a=>{a.n(a.i(66114))},50708,a=>{"use strict";a.i(70396);var b=a.i(73727),c=a.i(83479);async function d(){let a=await (0,c.auth)();(0,b.redirect)(a?"/dashboard":"/login")}a.s(["default",()=>d,"runtime",0,"nodejs"])}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__2eb85fa9._.js.map

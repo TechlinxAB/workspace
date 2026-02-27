@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "functions": {
+    "/": {},
+    "/_middleware": {
+      "runtime": "nodejs",
+      "matchers": [
+        {
+          "regexp": "^(?:\\/(_next\\/data\\/[^/]{1,}))?(?:\\/((?!api|_next\\/static|_next\\/image|favicon.ico|.*\\..*).*))(\\.json)?[\\/#\\?]?$",
+          "originalSource": "/((?!api|_next/static|_next/image|favicon.ico|.*\\..*).*)"
+        }
+      ]
+    },
+    "/admin/clients": {},
+    "/admin/overview": {},
+    "/admin/requests": {},
+    "/admin/users": {},
+    "/api/admin/users": {},
+    "/api/admin/users/[id]": {},
+    "/api/auth/[...nextauth]": {},
+    "/billing/invoices": {},
+    "/billing/plans": {},
+    "/dashboard": {},
+    "/it/cases": {},
+    "/login": {},
+    "/marketing/overview": {},
+    "/marketing/requests": {},
+    "/requests/inbox": {},
+    "/website/overview": {},
+    "/website/pages": {},
+    "/website/requests": {}
+  }
+}

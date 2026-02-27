@@ -1,14 +1,24 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import { loginAction, type LoginActionState } from "@/app/login/actions";
 
-const initialState: LoginActionState = {
-  error: null
+type LoginFormProps = {
+  initialError?: string | null;
 };
 
-export function LoginForm() {
-  const [state, formAction, pending] = useActionState(loginAction, initialState);
+export function LoginForm({ initialError = null }: LoginFormProps) {
+  const [state, formAction, pending] = useActionState(loginAction, {
+    error: initialError,
+    email: ""
+  });
+  const [email, setEmail] = useState("");
+
+  useEffect(() => {
+    if (state.email) {
+      setEmail(state.email);
+    }
+  }, [state.email]);
 
   return (
     <form action={formAction} className="space-y-4">
@@ -20,6 +30,8 @@ export function LoginForm() {
           id="email"
           name="email"
           type="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
           autoComplete="email"
           className="focus-ring h-11 w-full rounded-2xl border border-[rgba(18,18,18,0.08)] bg-white/80 px-4 text-sm text-ink shadow-[0_8px_20px_rgba(18,18,18,0.05)]"
           placeholder="you@company.com"
@@ -43,7 +55,7 @@ export function LoginForm() {
       </div>
 
       {state.error ? (
-        <p className="rounded-2xl border border-[rgba(205,84,71,0.18)] bg-dangerBg px-4 py-3 text-sm text-danger">
+        <p className="rounded-2xl border border-[rgba(205,84,71,0.18)] bg-dangerBg px-4 py-3 text-sm font-medium text-danger">
           {state.error}
         </p>
       ) : null}

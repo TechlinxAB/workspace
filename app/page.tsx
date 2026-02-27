@@ -1,9 +1,9 @@
 import { redirect } from "next/navigation";
-import { getActiveSessionUser } from "@/lib/authz";
+import { auth } from "@/auth";
 
 export const runtime = "nodejs";
 
 export default async function HomePage() {
-  const user = await getActiveSessionUser();
-  redirect(user ? "/dashboard" : "/login");
+  const session = await auth();
+  redirect(session ? "/dashboard" : "/login");
 }

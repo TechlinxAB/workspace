@@ -1,0 +1,127 @@
+{
+  "node": {
+    "00bbeedc3232f6fdc8ebfab7799beaf34bd94d81bc": {
+      "workers": {
+        "app/(workspace)/admin/clients/page": {
+          "moduleId": 60265,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/admin/overview/page": {
+          "moduleId": 85164,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/admin/requests/page": {
+          "moduleId": 2778,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/admin/users/page": {
+          "moduleId": 84623,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/billing/invoices/page": {
+          "moduleId": 12744,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/billing/plans/page": {
+          "moduleId": 11322,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/dashboard/page": {
+          "moduleId": 15436,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/it/cases/page": {
+          "moduleId": 25327,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/marketing/overview/page": {
+          "moduleId": 55431,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/marketing/requests/page": {
+          "moduleId": 33985,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/requests/inbox/page": {
+          "moduleId": 30746,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/website/overview/page": {
+          "moduleId": 81751,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/website/pages/page": {
+          "moduleId": 41351,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        },
+        "app/(workspace)/website/requests/page": {
+          "moduleId": 12238,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        }
+      },
+      "layer": {
+        "app/(workspace)/admin/clients/page": "rsc",
+        "app/(workspace)/admin/overview/page": "rsc",
+        "app/(workspace)/admin/requests/page": "rsc",
+        "app/(workspace)/admin/users/page": "rsc",
+        "app/(workspace)/billing/invoices/page": "rsc",
+        "app/(workspace)/billing/plans/page": "rsc",
+        "app/(workspace)/dashboard/page": "rsc",
+        "app/(workspace)/it/cases/page": "rsc",
+        "app/(workspace)/marketing/overview/page": "rsc",
+        "app/(workspace)/marketing/requests/page": "rsc",
+        "app/(workspace)/requests/inbox/page": "rsc",
+        "app/(workspace)/website/overview/page": "rsc",
+        "app/(workspace)/website/pages/page": "rsc",
+        "app/(workspace)/website/requests/page": "rsc"
+      },
+      "filename": "components/topbar.tsx",
+      "exportedName": "$$RSC_SERVER_ACTION_0"
+    },
+    "605f64df800590651b737d2a36a6c6408928e84f24": {
+      "workers": {
+        "app/login/page": {
+          "moduleId": 8752,
+          "async": false,
+          "exportedName": "loginAction",
+          "filename": "app/login/actions.ts"
+        }
+      },
+      "layer": {
+        "app/login/page": "action-browser"
+      },
+      "filename": "app/login/actions.ts",
+      "exportedName": "loginAction"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "6Sp3lZwThUx69OyuFoGal55JdKHpTnIg7tuE+WvOnzQ="
+}

@@ -11,7 +11,7 @@ import {
   Users
 } from "lucide-react";
 import type { ComponentType } from "react";
-import type { Role } from "@/lib/roles";
+import { isTechlinxAdmin, type Role } from "@/lib/roles";
 
 export type NavItem = {
   label: string;
@@ -21,13 +21,14 @@ export type NavItem = {
 
 export type NavGroup = {
   label: string;
-  adminOnly?: boolean;
+  key: "workspace" | "website" | "marketing" | "billing" | "admin";
   items: NavItem[];
 };
 
 export const navGroups: NavGroup[] = [
   {
     label: "WORKSPACE",
+    key: "workspace",
     items: [
       { label: "Home", href: "/dashboard", icon: Home },
       { label: "Inbox", href: "/requests/inbox", icon: Inbox },
@@ -36,6 +37,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "WEBSITE",
+    key: "website",
     items: [
       { label: "Overview", href: "/website/overview", icon: Globe },
       { label: "Pages", href: "/website/pages", icon: FolderKanban },
@@ -44,6 +46,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "MARKETING",
+    key: "marketing",
     items: [
       { label: "Overview", href: "/marketing/overview", icon: BriefcaseBusiness },
       { label: "Requests", href: "/marketing/requests", icon: Inbox }
@@ -51,6 +54,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "BILLING",
+    key: "billing",
     items: [
       { label: "Invoices", href: "/billing/invoices", icon: CreditCard },
       { label: "Plans", href: "/billing/plans", icon: Building2 }
@@ -58,7 +62,7 @@ export const navGroups: NavGroup[] = [
   },
   {
     label: "ADMIN",
-    adminOnly: true,
+    key: "admin",
     items: [
       { label: "Overview", href: "/admin/overview", icon: Boxes },
       { label: "Users", href: "/admin/users", icon: Users },
@@ -69,5 +73,17 @@ export const navGroups: NavGroup[] = [
 ];
 
 export function getNavGroups(role: Role) {
-  return navGroups.filter((group) => !group.adminOnly || role === "admin");
+  if (isTechlinxAdmin(role)) {
+    return navGroups;
+  }
+
+  if (role === "techlinx_webdev") {
+    return navGroups.filter((group) => group.key === "workspace" || group.key === "website");
+  }
+
+  if (role === "techlinx_marketing") {
+    return navGroups.filter((group) => group.key === "workspace" || group.key === "marketing");
+  }
+
+  return navGroups.filter((group) => group.key !== "admin");
 }

@@ -8,8 +8,11 @@ datasource db {
 }
 
 enum Role {
-  admin
-  customer
+  techlinx_admin
+  techlinx_webdev
+  techlinx_marketing
+  client_admin
+  client_user
 }
 
 model User {
@@ -17,7 +20,7 @@ model User {
   email         String    @unique
   name          String?
   passwordHash  String?
-  role          Role      @default(customer)
+  role          Role      @default(client_user)
   isActive      Boolean   @default(true)
   emailVerified DateTime?
   image         String?

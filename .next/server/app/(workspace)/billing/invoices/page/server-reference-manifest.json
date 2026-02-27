@@ -1,0 +1,20 @@
+{
+  "node": {
+    "00bbeedc3232f6fdc8ebfab7799beaf34bd94d81bc": {
+      "workers": {
+        "app/(workspace)/billing/invoices/page": {
+          "moduleId": 12744,
+          "async": false,
+          "exportedName": "$$RSC_SERVER_ACTION_0",
+          "filename": "components/topbar.tsx"
+        }
+      },
+      "layer": {
+        "app/(workspace)/billing/invoices/page": "rsc"
+      },
+      "exportedName": "$$RSC_SERVER_ACTION_0",
+      "filename": "components/topbar.tsx"
+    }
+  },
+  "edge": {}
+}

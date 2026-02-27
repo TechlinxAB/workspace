@@ -1,0 +1,3 @@
+module.exports=[72470,a=>{a.v({className:"nunito_sans_85125b21-module__PGQIpG__className",variable:"nunito_sans_85125b21-module__PGQIpG__variable"})},33290,a=>{"use strict";var b=a.i(7997),c=a.i(72470);let d={className:c.default.className,style:{fontFamily:"'Nunito Sans', 'Nunito Sans Fallback'",fontStyle:"normal"}};function e({children:a}){return(0,b.jsx)("html",{lang:"en",children:(0,b.jsx)("body",{className:`${d.variable} min-h-screen font-sans antialiased`,children:a})})}null!=c.default.variable&&(d.variable=c.default.variable),a.s(["default",()=>e,"metadata",0,{title:"Techlinx Workspace",description:"Premium SaaS admin dashboard UI"}],33290)}];
+
+//# sourceMappingURL=%5Broot-of-the-server%5D__a53a18d0._.js.map
