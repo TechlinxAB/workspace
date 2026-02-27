@@ -2,8 +2,8 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { getNavGroups, sidebarBottom } from "@/lib/nav";
-import type { Role } from "@/lib/mockData";
+import { getNavGroups } from "@/lib/nav";
+import type { Role } from "@/lib/roles";
 
 type SidebarProps = {
   role: Role;
@@ -65,22 +65,6 @@ export function Sidebar({ role }: SidebarProps) {
           </div>
         ))}
       </nav>
-
-      <div className="mt-5 border-t border-[rgba(18,18,18,0.06)] pt-4">
-        {sidebarBottom.map((item) => {
-          const Icon = item.icon;
-          return (
-            <button
-              key={item.label}
-              type="button"
-              className="flex w-full items-center gap-3 rounded-full px-[14px] py-3 text-left text-sm font-semibold text-muted transition-all duration-200 hover:bg-[rgba(241,244,242,0.8)] hover:text-ink"
-            >
-              <Icon className="h-4 w-4" />
-              <span>{item.label}</span>
-            </button>
-          );
-        })}
-      </div>
     </aside>
   );
 }

@@ -1,14 +1,27 @@
-"use client";
-
 import { Bell, Search } from "lucide-react";
-import type { Role } from "@/lib/mockData";
+import { signOut } from "@/auth";
+import type { Role } from "@/lib/roles";
 
 type TopbarProps = {
-  role: Role;
-  onRoleChange: (role: Role) => void;
+  user: {
+    name: string | null;
+    email: string;
+    role: Role;
+  };
 };
 
-export function Topbar({ role, onRoleChange }: TopbarProps) {
+function getInitials(name: string | null, email: string) {
+  const source = name?.trim() || email;
+  return source
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((part) => part[0]?.toUpperCase() ?? "")
+    .join("");
+}
+
+export function Topbar({ user }: TopbarProps) {
+  const displayName = user.name ?? user.email;
+
   return (
     <header className="flex h-16 flex-wrap items-center justify-between gap-3">
       <label className="relative min-w-[260px] flex-1 max-w-[520px]">
@@ -21,29 +34,6 @@ export function Topbar({ role, onRoleChange }: TopbarProps) {
       </label>
 
       <div className="flex items-center gap-2">
-        <div className="rounded-full border border-[rgba(18,18,18,0.06)] p-1">
-          <button
-            type="button"
-            onClick={() => onRoleChange("customer")}
-            className={[
-              "focus-ring rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200",
-              role === "customer" ? "bg-accent text-[#2F5B3A]" : "text-muted hover:bg-[rgba(241,244,242,0.8)]"
-            ].join(" ")}
-          >
-            Alice (Customer)
-          </button>
-          <button
-            type="button"
-            onClick={() => onRoleChange("admin")}
-            className={[
-              "focus-ring rounded-full px-3 py-1.5 text-xs font-semibold transition-all duration-200",
-              role === "admin" ? "bg-accent text-[#2F5B3A]" : "text-muted hover:bg-[rgba(241,244,242,0.8)]"
-            ].join(" ")}
-          >
-            Bob (Admin)
-          </button>
-        </div>
-
         <button
           type="button"
           className="focus-ring relative grid h-10 w-10 place-items-center rounded-full text-muted transition-all duration-200 hover:bg-[rgba(241,244,242,0.8)] hover:text-ink"
@@ -54,15 +44,27 @@ export function Topbar({ role, onRoleChange }: TopbarProps) {
 
         <div className="flex items-center gap-2 rounded-full px-2 py-1.5">
           <span className="grid h-8 w-8 place-items-center rounded-full bg-accent text-xs font-bold text-[#2F5B3A]">
-            {role === "admin" ? "BO" : "AL"}
+            {getInitials(user.name, user.email)}
           </span>
           <span className="pr-1 text-xs leading-tight">
-            <span className="block font-semibold text-ink">
-              {role === "admin" ? "Bob (Admin)" : "Alice (Customer)"}
-            </span>
-            <span className="block text-muted">{role === "admin" ? "Workspace Admin" : "Workspace User"}</span>
+            <span className="block font-semibold text-ink">{displayName}</span>
+            <span className="block text-muted">{user.role === "admin" ? "Workspace Admin" : "Workspace User"}</span>
           </span>
         </div>
+
+        <form
+          action={async () => {
+            "use server";
+            await signOut({ redirectTo: "/login" });
+          }}
+        >
+          <button
+            type="submit"
+            className="focus-ring rounded-full border border-[rgba(18,18,18,0.08)] px-4 py-2 text-xs font-semibold text-muted transition hover:bg-[rgba(241,244,242,0.8)] hover:text-ink"
+          >
+            Log out
+          </button>
+        </form>
       </div>
     </header>
   );
