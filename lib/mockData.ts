@@ -1,5 +1,3 @@
-export type Role = "customer" | "admin";
-
 export type ItemStatus = "Paid" | "Overdue" | "In Review" | "Pending" | "Completed";
 
 export type StatShape = {
@@ -178,6 +176,10 @@ export const routeContent: Record<string, { title: string; description: string }
   "/admin/overview": {
     title: "Admin Overview",
     description: "High-level control center for operational oversight."
+  },
+  "/admin/users": {
+    title: "Admin Users",
+    description: "Manage workspace users, access, and password resets."
   },
   "/admin/requests": {
     title: "Admin Requests",

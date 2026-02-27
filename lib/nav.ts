@@ -8,10 +8,10 @@ import {
   HardDrive,
   Home,
   Inbox,
-  LogOut
+  Users
 } from "lucide-react";
 import type { ComponentType } from "react";
-import type { Role } from "@/lib/mockData";
+import type { Role } from "@/lib/roles";
 
 export type NavItem = {
   label: string;
@@ -61,14 +61,11 @@ export const navGroups: NavGroup[] = [
     adminOnly: true,
     items: [
       { label: "Overview", href: "/admin/overview", icon: Boxes },
+      { label: "Users", href: "/admin/users", icon: Users },
       { label: "Requests", href: "/admin/requests", icon: Inbox },
       { label: "Clients", href: "/admin/clients", icon: Building2 }
     ]
   }
-];
-
-export const sidebarBottom = [
-  { label: "Log out", href: "#", icon: LogOut }
 ];
 
 export function getNavGroups(role: Role) {
