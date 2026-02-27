@@ -1,5 +1,6 @@
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import { isTechlinxAdmin } from "@/lib/roles";
 
 export async function getActiveSessionUser() {
   const session = await auth();
@@ -33,7 +34,7 @@ export async function getAdminSessionUser() {
     return { status: 401 as const };
   }
 
-  if (user.role !== "admin") {
+  if (!isTechlinxAdmin(user.role)) {
     return { status: 403 as const, user };
   }
 

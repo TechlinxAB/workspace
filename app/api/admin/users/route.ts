@@ -5,6 +5,10 @@ import { isRole } from "@/lib/roles";
 
 export const runtime = "nodejs";
 
+function loadArgon2() {
+  return eval("require")("argon2") as typeof import("argon2");
+}
+
 export async function GET() {
   const admin = await getAdminSessionUser();
   if (admin.status === 401) {
@@ -41,11 +45,9 @@ export async function POST(request: Request) {
   }
 
   const body = await request.json();
-  const email = String(body.email ?? "")
-    .trim()
-    .toLowerCase();
+  const email = String(body.email ?? "").trim().toLowerCase();
   const name = String(body.name ?? "").trim();
-  const role = body.role;
+  const role = body.role ?? "client_user";
   const temporaryPassword = String(body.temporaryPassword ?? "");
 
   if (!email || !name || !temporaryPassword || !isRole(role)) {
@@ -57,7 +59,7 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: "User already exists" }, { status: 409 });
   }
 
-  const argon2 = await import("argon2");
+  const argon2 = loadArgon2();
   const passwordHash = await argon2.hash(temporaryPassword, { type: argon2.argon2id });
 
   const user = await prisma.user.create({
@@ -65,6 +67,7 @@ export async function POST(request: Request) {
       email,
       name,
       role,
+      isActive: true,
       passwordHash
     },
     select: {

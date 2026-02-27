@@ -1,0 +1,23 @@
+{
+  "/(workspace)/admin/clients/page": "/admin/clients",
+  "/(workspace)/admin/overview/page": "/admin/overview",
+  "/(workspace)/admin/requests/page": "/admin/requests",
+  "/(workspace)/admin/users/page": "/admin/users",
+  "/(workspace)/billing/invoices/page": "/billing/invoices",
+  "/(workspace)/billing/plans/page": "/billing/plans",
+  "/(workspace)/dashboard/page": "/dashboard",
+  "/(workspace)/it/cases/page": "/it/cases",
+  "/(workspace)/marketing/overview/page": "/marketing/overview",
+  "/(workspace)/marketing/requests/page": "/marketing/requests",
+  "/(workspace)/requests/inbox/page": "/requests/inbox",
+  "/(workspace)/website/overview/page": "/website/overview",
+  "/(workspace)/website/pages/page": "/website/pages",
+  "/(workspace)/website/requests/page": "/website/requests",
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/admin/users/[id]/route": "/api/admin/users/[id]",
+  "/api/admin/users/route": "/api/admin/users",
+  "/api/auth/[...nextauth]/route": "/api/auth/[...nextauth]",
+  "/login/page": "/login",
+  "/page": "/"
+}

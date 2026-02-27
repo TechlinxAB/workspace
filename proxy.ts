@@ -1,21 +1,14 @@
 import { NextResponse } from "next/server";
 import { auth } from "@/auth";
 import prisma from "@/lib/prisma";
+import { isTechlinxAdmin } from "@/lib/roles";
 
-const WORKSPACE_PREFIXES = ["/dashboard", "/requests", "/it", "/website", "/marketing", "/billing", "/admin"];
-
-function isWorkspacePath(pathname: string) {
-  return WORKSPACE_PREFIXES.some((prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`));
-}
+const SESSION_COOKIE_NAME = process.env.NODE_ENV === "production" ? "__Secure-authjs.session-token" : "authjs.session-token";
 
 export const proxy = auth(async (request) => {
   const { pathname } = request.nextUrl;
 
   if (pathname === "/login" || pathname.startsWith("/api/auth")) {
-    return NextResponse.next();
-  }
-
-  if (!isWorkspacePath(pathname)) {
     return NextResponse.next();
   }
 
@@ -30,10 +23,18 @@ export const proxy = auth(async (request) => {
 
   if (!user || !user.isActive) {
     await prisma.session.deleteMany({ where: { userId: request.auth.user.id } });
-    return NextResponse.redirect(new URL("/login", request.url));
+    const response = NextResponse.redirect(new URL("/login?error=disabled", request.url));
+    response.cookies.set(SESSION_COOKIE_NAME, "", {
+      httpOnly: true,
+      sameSite: "lax",
+      path: "/",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 0
+    });
+    return response;
   }
 
-  if (pathname.startsWith("/admin") && user.role !== "admin") {
+  if (pathname.startsWith("/admin") && !isTechlinxAdmin(user.role)) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 

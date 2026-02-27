@@ -1,0 +1,23 @@
+{
+  "/(workspace)/admin/clients/page": "app/(workspace)/admin/clients/page.js",
+  "/(workspace)/admin/overview/page": "app/(workspace)/admin/overview/page.js",
+  "/(workspace)/admin/requests/page": "app/(workspace)/admin/requests/page.js",
+  "/(workspace)/admin/users/page": "app/(workspace)/admin/users/page.js",
+  "/(workspace)/billing/invoices/page": "app/(workspace)/billing/invoices/page.js",
+  "/(workspace)/billing/plans/page": "app/(workspace)/billing/plans/page.js",
+  "/(workspace)/dashboard/page": "app/(workspace)/dashboard/page.js",
+  "/(workspace)/it/cases/page": "app/(workspace)/it/cases/page.js",
+  "/(workspace)/marketing/overview/page": "app/(workspace)/marketing/overview/page.js",
+  "/(workspace)/marketing/requests/page": "app/(workspace)/marketing/requests/page.js",
+  "/(workspace)/requests/inbox/page": "app/(workspace)/requests/inbox/page.js",
+  "/(workspace)/website/overview/page": "app/(workspace)/website/overview/page.js",
+  "/(workspace)/website/pages/page": "app/(workspace)/website/pages/page.js",
+  "/(workspace)/website/requests/page": "app/(workspace)/website/requests/page.js",
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/admin/users/[id]/route": "app/api/admin/users/[id]/route.js",
+  "/api/admin/users/route": "app/api/admin/users/route.js",
+  "/api/auth/[...nextauth]/route": "app/api/auth/[...nextauth]/route.js",
+  "/login/page": "app/login/page.js",
+  "/page": "app/page.js"
+}

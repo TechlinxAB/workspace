@@ -1,3 +1,4 @@
+import "dotenv/config";
 import argon2 from "argon2";
 import { PrismaClient } from "@prisma/client";
 
@@ -23,14 +24,14 @@ async function main() {
     where: { email },
     update: {
       name,
-      role: "admin",
+      role: "techlinx_admin",
       isActive: true,
       passwordHash
     },
     create: {
       email,
       name,
-      role: "admin",
+      role: "techlinx_admin",
       isActive: true,
       passwordHash
     },
